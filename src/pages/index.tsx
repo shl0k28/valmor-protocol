@@ -114,13 +114,30 @@ const Home: NextPage = () => {
 					</VStack>
 				) :
 				(
-					<VStack>
+					<VStack fontFamily={'monospace'}>
 						<Input 
 							value={command} 
 							onChange={(e) => setCommand(e.target.value)}
 							w={'50%'}
+							variant={'filled'}
+							bgColor={'gray.800'}
+							rounded={'none'}
+							color={'gray.300'}
 						/>
-						<Button onClick={executeIntents}>execute</Button>
+						<Button
+							mt={4}
+							style={{
+								borderRadius: 0,
+								backgroundColor: 'rgba(255, 255, 255, 0.1)',
+								fontFamily: 'monospace'
+							}}
+							color={'gray.300'}
+							// fontSize={'xl'}
+							fontWeight={'regular'}
+							onClick={() => executeIntents()}
+						>
+							Get Started
+						</Button> 
 					</VStack>
 				)
 			}
