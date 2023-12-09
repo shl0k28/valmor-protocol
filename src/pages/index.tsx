@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Button } from '@chakra-ui/react'
+import { Box, Button, Heading, Stack, Text, VStack } from '@chakra-ui/react'
 import { NextPage } from 'next'
 
 import {
@@ -38,18 +38,40 @@ const Home: NextPage = () => {
 
 	{/* <Button onClick={() => createNewSafe(`https://goerli.rpc.thirdweb.com`)}>Login</Button> */}
 	
+	const heroText = `Interchain 1-click defi automation `
 	return (
 
-		<Box
+		<Stack
 			bg={`url('/valmor protocol.png')`}
 			bgPosition="center"
 			bgRepeat="no-repeat"
 			bgSize="cover"
 			width="100vw"
 			height="100vh"
+			spacing={8}
 		>
-			<Button>get started</Button>
-		</Box>
+			<Stack px={[4,8,12]} p={[4,8,12]}>
+				<Heading fontFamily={'Major Mono Display'} color={'gray.400'}>
+					valmor
+				</Heading>
+			</Stack>
+			<VStack fontFamily={'monospace'}>
+				<Text fontSize={'3xl'} color={'gray.300'} fontFamily={'Major Mono Display'}>{heroText}</Text>
+				<Button
+					mt={4}
+					style={{
+						borderRadius: 0,
+						backgroundColor: 'rgba(255, 255, 255, 0.1)',
+						fontFamily: 'monospace'
+					}}
+					color={'gray.300'}
+					fontSize={'xl'}
+					fontWeight={'regular'}
+				>
+					Get Started
+				</Button>
+			</VStack>
+		</Stack>
 	)
 }
 

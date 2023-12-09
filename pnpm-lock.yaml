@@ -14,6 +14,9 @@ dependencies:
   '@emotion/styled':
     specifier: ^11.11.0
     version: 11.11.0(@emotion/react@11.11.1)(@types/react@18.0.0)(react@18.0.0)
+  '@fontsource/major-mono-display':
+    specifier: ^5.0.18
+    version: 5.0.18
   '@safe-global/auth-kit':
     specifier: ^2.0.0
     version: 2.0.0(@babel/runtime@7.23.5)
@@ -1595,6 +1598,10 @@ packages:
       '@ethersproject/logger': 5.7.0
       '@ethersproject/properties': 5.7.0
       '@ethersproject/strings': 5.7.0
+    dev: false
+
+  /@fontsource/major-mono-display@5.0.18:
+    resolution: {integrity: sha512-SJvjpGJX4eAefCjWCCTX512VOL6lPlT64okKIV3NGh5NOAP/a0LqzDWMOT8dZ77zkpHhpXAqZxmMlmSTtrNGbA==}
     dev: false
 
   /@humanwhocodes/config-array@0.6.0:
