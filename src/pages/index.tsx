@@ -16,7 +16,16 @@ const Home: NextPage = () => {
 	
 	const { address, isConnected, connector } = useAccount()
 	const [ command, setCommand] = useState('')
-
+	const [ txObjectArray, setTxObjectArray] = useState<Array<{
+		to: string,
+		data: string,
+		value: string
+	}>>([{
+		to: '',
+		data: '',
+		value: ''
+	}])
+	
 	// const createNewSafe = async (rpcUrl: string) => {
 		
 	// 	const safeAuthInitOptions: SafeAuthInitOptions = {
@@ -43,14 +52,17 @@ const Home: NextPage = () => {
 
 	{/* <Button onClick={() => createNewSafe(`https://goerli.rpc.thirdweb.com`)}>Login</Button> */}
 	
-	const heroText = `Interchain 1-click defi automation `
+	const heroText = `Infra for building the next-gen of web3 automation agents`
 	
 	const executeIntents = async () => {
 		const url = 'http://localhost:8080/payments';
+		const chainId = '137'
+		console.log()
 		const body = JSON.stringify({
-			chainId: (await connector!.getChainId()).toString(),
+			chainId: 1,
+			// chainId: (await connector!.getChainId()).toString(),
 			command: command,
-			address: address,
+			recipient: address,
 		});
 
 		try {
@@ -62,7 +74,9 @@ const Home: NextPage = () => {
 				body: body,
 			});
 
-			const txObjects = response.body
+			const res = await response.json()
+			setTxObjectArray([res])
+			console.log(res)
 		} catch (error) {
 			// Handle network error
 		}
@@ -84,9 +98,12 @@ const Home: NextPage = () => {
 					Valmor
 				</Heading>
 				{
-					isConnected && (<Text color={'gray.400'}>
-						{address}
-					</Text>)
+					// isConnected && (<Text color={'gray.400'} fontFamily={'mono'}>
+					// 	{address?.slice(0, 6)}...{address?.slice(-6)}
+					// </Text>)
+				}
+				{
+					isConnected && (<ConnectKitButton />)
 				}
 			</HStack>
 			{
@@ -137,7 +154,36 @@ const Home: NextPage = () => {
 							onClick={() => executeIntents()}
 						>
 							Get Started
-						</Button> 
+						</Button>
+						{
+							txObjectArray.length > 0 && (
+								<Stack
+									bg="gray.100"
+									p={4}
+									borderRadius="md"
+									// color="red"
+									w={'50%'}
+									bgColor={'gray.800'}
+									color={'gray.300'}
+									mt={8}
+									spacing={8}
+								>
+									<Text fontWeight="bold" fontSize={'2xl'} fontFamily={'Major Mono Display'}>Transaction Details:</Text>
+									{
+										txObjectArray.map((obj) => {
+											return (
+												<div>
+													<Text>To: {obj.to}</Text>
+													<Text>Data: {obj.data}</Text>
+													<Text>Value: {obj.value}</Text>
+												</div>										
+											)
+										})
+									}
+									{/* ... add other transaction details you want to display */}
+								</Stack>	 
+							)
+						}
 					</VStack>
 				)
 			}
